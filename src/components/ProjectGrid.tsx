@@ -44,10 +44,11 @@ export function ProjectGrid({
   const filteredProjects = useMemo(() => {
     const mappedCategory = categoryMap[activeCategory];
     const indexById = new Map(projects.map((project, index) => [project.id, index]));
+    const workProjects = projects.filter((project) => project.vimeoId !== site.reelVimeoId);
     const visibleProjects =
       mappedCategory === "All"
-        ? projects
-        : projects.filter((project) => project.category === mappedCategory && project.vimeoId !== site.reelVimeoId);
+        ? workProjects
+        : workProjects.filter((project) => project.category === mappedCategory);
 
     if (preserveOrder) return visibleProjects;
 

@@ -1,4 +1,5 @@
 import { projects as cachedProjects, categories } from "@/data/projects";
+import { site } from "@/data/site";
 import { vimeoCategoryMap } from "@/data/vimeo-categories";
 import { titleCategoryMap } from "@/data/vimeo-projects";
 import type { Project, ProjectCategory } from "@/data/projects";
@@ -148,8 +149,33 @@ export async function getPortfolioProject(id: string) {
   return projects.find((project) => project.id === id);
 }
 
+export function isReelProject(project: Project) {
+  return project.vimeoId === site.reelVimeoId;
+}
+
+export async function getWorkProjects() {
+  const projects = await getPortfolioProjects();
+  return projects.filter((project) => !isReelProject(project));
+}
+
+export async function getWorkProject(id: string) {
+  const project = await getPortfolioProject(id);
+  return project && !isReelProject(project) ? project : undefined;
+}
+
 export async function getAdjacentPortfolioProjects(id: string) {
   const projects = await getPortfolioProjects();
+  const index = projects.findIndex((project) => project.id === id);
+  if (index === -1) return { previous: undefined, next: undefined };
+
+  return {
+    previous: projects[(index - 1 + projects.length) % projects.length],
+    next: projects[(index + 1) % projects.length],
+  };
+}
+
+export async function getAdjacentWorkProjects(id: string) {
+  const projects = await getWorkProjects();
   const index = projects.findIndex((project) => project.id === id);
   if (index === -1) return { previous: undefined, next: undefined };
 

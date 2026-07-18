@@ -3,21 +3,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CreditsTable } from "@/components/CreditsTable";
 import { VimeoPlayer } from "@/components/VimeoPlayer";
-import { getAdjacentPortfolioProjects, getPortfolioProject } from "@/lib/projects";
+import { getAdjacentWorkProjects, getWorkProject } from "@/lib/projects";
 import { splitProjectTitle } from "@/lib/project-title";
 import { projects } from "@/data/projects";
+import { site } from "@/data/site";
 
 type ProjectPageProps = {
   params: Promise<{ id: string }>;
 };
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ id: project.id }));
+  return projects.filter((project) => project.vimeoId !== site.reelVimeoId).map((project) => ({ id: project.id }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id } = await params;
-  const project = await getPortfolioProject(id);
+  const project = await getWorkProject(id);
 
   return {
     title: project ? project.title : "Project",
@@ -39,13 +40,13 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
-  const project = await getPortfolioProject(id);
+  const project = await getWorkProject(id);
 
   if (!project) {
     notFound();
   }
 
-  const { previous, next } = await getAdjacentPortfolioProjects(project.id);
+  const { previous, next } = await getAdjacentWorkProjects(project.id);
   const title = splitProjectTitle(project.title);
   const structuredData = {
     "@context": "https://schema.org",
