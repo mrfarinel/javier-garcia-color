@@ -137,28 +137,35 @@ export function FullscreenHighlightHome({ projects }: FullscreenHighlightHomePro
           Next →
         </button>
       </div>
-      {isVideoOpen ? (
-        <div
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b0b0d]/92 px-5 py-8"
-          role="dialog"
-          onClick={() => setIsVideoOpen(false)}
-        >
-          <div className="w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
-            <div className="mb-4 flex items-center justify-between gap-6">
-              <h2 className="eyebrow text-main">{activeProject.title}</h2>
-              <button
-                type="button"
-                onClick={() => setIsVideoOpen(false)}
-                className="quiet-link text-[0.66rem] uppercase tracking-[0.22em] text-secondary"
-              >
-                Close
-              </button>
-            </div>
-            <VimeoPlayer vimeoId={activeProject.vimeoId} title={activeProject.title} />
+      <div
+        aria-hidden={!isVideoOpen}
+        aria-modal={isVideoOpen}
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0b0b0d]/92 px-5 py-8 transition-opacity duration-200 ${
+          isVideoOpen ? "visible pointer-events-auto opacity-100" : "invisible pointer-events-none opacity-0"
+        }`}
+        role="dialog"
+        onClick={() => setIsVideoOpen(false)}
+      >
+        <div className="w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
+          <div className="mb-4 flex items-center justify-between gap-6">
+            <h2 className="eyebrow text-main">{activeProject.title}</h2>
+            <button
+              type="button"
+              onClick={() => setIsVideoOpen(false)}
+              className="quiet-link text-[0.66rem] uppercase tracking-[0.22em] text-secondary"
+              tabIndex={isVideoOpen ? 0 : -1}
+            >
+              Close
+            </button>
           </div>
+          <VimeoPlayer
+            key={activeProject.id}
+            vimeoId={activeProject.vimeoId}
+            title={activeProject.title}
+            loading="eager"
+          />
         </div>
-      ) : null}
+      </div>
     </section>
   );
 }

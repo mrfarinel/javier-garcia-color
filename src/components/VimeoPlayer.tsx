@@ -3,9 +3,16 @@ type VimeoPlayerProps = {
   title: string;
   aspectClassName?: string;
   fit?: "contain" | "cover";
+  loading?: "eager" | "lazy";
 };
 
-export function VimeoPlayer({ vimeoId, title, aspectClassName = "aspect-video", fit = "contain" }: VimeoPlayerProps) {
+export function VimeoPlayer({
+  vimeoId,
+  title,
+  aspectClassName = "aspect-video",
+  fit = "contain",
+  loading = "lazy",
+}: VimeoPlayerProps) {
   const params = new URLSearchParams({
     byline: "0",
     controls: "1",
@@ -26,7 +33,7 @@ export function VimeoPlayer({ vimeoId, title, aspectClassName = "aspect-video", 
             ? "absolute left-1/2 top-1/2 h-[135%] w-full -translate-x-1/2 -translate-y-1/2"
             : "h-full w-full"
         }
-        loading="lazy"
+        loading={loading}
       />
     </div>
   );
