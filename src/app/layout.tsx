@@ -6,16 +6,18 @@ import { Header } from "@/components/Header";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.javiergarciacolor.com"),
   title: {
-    default: "Javier García | Colorist",
+    default: "Javier García | DI Colorist",
     template: "%s | Javier García",
   },
-  description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
+  description:
+    "Javier García is a Madrid-based DI Colorist working internationally across fiction, commercials, series and music videos.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Javier García | Colorist",
-    description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
+    title: "Javier García | DI Colorist",
+    description:
+      "Javier García is a Madrid-based DI Colorist working internationally across fiction, commercials, series and music videos.",
     type: "website",
     url: "https://www.javiergarciacolor.com",
     siteName: "Javier García",
@@ -24,14 +26,15 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Javier García colorist portfolio preview",
+        alt: "Javier García DI Colorist portfolio preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Javier García | Colorist",
-    description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
+    title: "Javier García | DI Colorist",
+    description:
+      "Javier García is a Madrid-based DI Colorist working internationally across fiction, commercials, series and music videos.",
     images: ["/og-image.jpg"],
   },
 };
@@ -56,7 +59,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Javier García",
-              jobTitle: "Colorist",
+              jobTitle: "DI Colorist",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Madrid",
