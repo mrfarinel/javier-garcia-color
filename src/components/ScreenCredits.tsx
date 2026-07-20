@@ -1,4 +1,5 @@
 import { screenCredits } from "@/data/screen-credits";
+import { site } from "@/data/site";
 
 export function ScreenCredits() {
   return (
@@ -6,13 +7,14 @@ export function ScreenCredits() {
       <div className="flex snap-x gap-4 overflow-x-auto pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {screenCredits.map((credit, index) => (
           <article key={`${credit.title}-${credit.year}`} className="w-[138px] shrink-0 snap-start sm:w-[156px] lg:w-[172px]">
-            <div className="relative aspect-[2/3] overflow-hidden border border-line bg-[#0e0e10]">
+            <div className="group relative aspect-[2/3] overflow-hidden border border-line bg-[#0e0e10]">
               <img
                 src={credit.poster}
                 alt={`${credit.title} poster`}
-                className="h-full w-full object-cover opacity-82 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                className="h-full w-full object-cover opacity-85 transition duration-300 group-hover:opacity-100"
                 loading="lazy"
               />
+              <div className="pointer-events-none absolute inset-0 bg-[#0b0b0d]/24 transition duration-300 group-hover:bg-[#0b0b0d]/4" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0b0d]/72 via-transparent to-transparent" />
               <span className="absolute left-3 top-3 text-[0.58rem] uppercase tracking-[0.18em] text-white/45">
                 {String(index + 1).padStart(2, "0")}
@@ -26,12 +28,21 @@ export function ScreenCredits() {
                 {credit.platform ? ` / ${credit.platform}` : ""}
               </p>
               <div className="mt-3 border-t border-line pt-3">
-                <p className="text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.role}</p>
-                <p className="mt-1 text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.year}</p>
+                <p className="text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.year}</p>
               </div>
             </div>
           </article>
         ))}
+      </div>
+      <div className="mt-6 flex justify-center">
+        <a
+          href={site.imdb}
+          target="_blank"
+          rel="noreferrer"
+          className="quiet-link text-[0.68rem] uppercase tracking-[0.24em] text-main"
+        >
+          View IMDb Credits →
+        </a>
       </div>
     </div>
   );
