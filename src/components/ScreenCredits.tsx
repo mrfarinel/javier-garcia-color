@@ -7,9 +7,6 @@ export function ScreenCredits() {
       <div className="flex snap-x gap-4 overflow-x-auto pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {screenCredits.map((credit, index) => (
           <article key={`${credit.title}-${credit.year}`} className="w-[138px] shrink-0 snap-start sm:w-[156px] lg:w-[172px]">
-            <span className="mb-3 block text-[0.58rem] uppercase tracking-[0.18em] text-minimal">
-              {String(index + 1).padStart(2, "0")}
-            </span>
             <div className="group relative aspect-[2/3] overflow-hidden border border-line bg-[#0e0e10]">
               <img
                 src={credit.poster}
