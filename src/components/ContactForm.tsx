@@ -156,7 +156,7 @@ export function ContactForm({ email }: ContactFormProps) {
       {feedback ? (
         <p
           className={`mt-4 text-right text-[0.68rem] uppercase tracking-[0.18em] ${
-            status === "sent" ? "text-secondary" : "text-body"
+            status === "sent" ? "text-[#6FA99A]" : "text-body"
           }`}
           role="status"
         >
