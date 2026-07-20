@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VimeoPlayer } from "@/components/VimeoPlayer";
 
 type ReelThumbnailProps = {
@@ -11,6 +11,20 @@ type ReelThumbnailProps = {
 
 export function ReelThumbnail({ image, vimeoId, title }: ReelThumbnailProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   return (
     <>

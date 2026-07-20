@@ -56,6 +56,20 @@ export function FeaturedReel({ projects, reelVimeoId }: FeaturedReelProps) {
     setIsVideoOpen(false);
   }, [initialProjects]);
 
+  useEffect(() => {
+    if (!isVideoOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsVideoOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isVideoOpen]);
+
   const activeProject = featuredProjects[activeIndex] ?? initialProjects[0];
   const activeTitle = activeProject ? splitProjectTitle(activeProject.title) : undefined;
   const visibleNavigationIndexes = getVisibleNavigationIndexes(activeIndex, featuredProjects.length);
