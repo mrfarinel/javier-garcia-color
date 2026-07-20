@@ -21,13 +21,15 @@ export function ScreenCredits() {
               </span>
             </div>
 
-            <div className="mt-4">
-              <h3 className="text-[0.72rem] uppercase leading-5 tracking-[0.14em] text-main">{credit.title}</h3>
+            <div className="mt-4 flex min-h-[126px] flex-col">
+              <h3 className="line-clamp-3 text-[0.72rem] uppercase leading-5 tracking-[0.14em] text-main">
+                {credit.title}
+              </h3>
               <p className="mt-2 text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-secondary">
                 {credit.type}
                 {credit.platform ? ` / ${credit.platform}` : ""}
               </p>
-              <div className="mt-3 border-t border-line pt-3">
+              <div className="mt-auto border-t border-line pt-3">
                 <p className="text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.year}</p>
               </div>
             </div>
@@ -41,7 +43,7 @@ export function ScreenCredits() {
           rel="noreferrer"
           className="quiet-link text-[0.68rem] uppercase tracking-[0.24em] text-main"
         >
-          View IMDb Credits →
+          Full IMDb Credits →
         </a>
       </div>
     </div>

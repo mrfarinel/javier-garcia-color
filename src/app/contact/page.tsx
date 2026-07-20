@@ -15,7 +15,7 @@ const contactSections = [
   },
   {
     title: "Phone",
-    items: [{ label: "Phone", value: "+34 666 73 38 25", href: "tel:+34666733825" }],
+    items: [{ value: "+34 666 73 38 25", href: "tel:+34666733825" }],
   },
 ];
 
@@ -48,14 +48,14 @@ export default function ContactPage() {
                 <div className="space-y-3">
                   {section.items.map((item) => (
                     <a
-                      key={`${section.title}-${item.label}`}
+                      key={`${section.title}-${item.value}`}
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                       className="grid gap-2 text-sm transition-colors duration-200 hover:text-main sm:grid-cols-[260px_1fr]"
                     >
                       <span className="flex flex-wrap gap-x-5 gap-y-1 text-[0.68rem] uppercase tracking-[0.2em] text-minimal">
-                        <span>{item.label}</span>
+                        {"label" in item ? <span>{item.label}</span> : null}
                         {"labelDetail" in item ? <span>{item.labelDetail}</span> : null}
                       </span>
                       <span className="text-body">{item.value}</span>

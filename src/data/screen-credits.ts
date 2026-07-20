@@ -36,13 +36,6 @@ export const screenCredits: ScreenCredit[] = [
     poster: "/images/screen-credits/the-cook-of-castamar.jpg",
   },
   {
-    title: "Una Vida, Una Cena",
-    type: "Series",
-    platform: "Prime Video",
-    year: "2019",
-    poster: "/images/screen-credits/una-vida-una-cena.jpg",
-  },
-  {
     title: "Nasdrovia (S02)",
     type: "Series",
     platform: "Movistar+",
@@ -106,5 +99,12 @@ export const screenCredits: ScreenCredit[] = [
     platform: "HBO",
     year: "2020",
     poster: "/images/screen-credits/por-h-o-por-b.jpg",
+  },
+  {
+    title: "Una Vida, Una Cena",
+    type: "Series",
+    platform: "Prime Video",
+    year: "2019",
+    poster: "/images/screen-credits/una-vida-una-cena.jpg",
   },
 ];
