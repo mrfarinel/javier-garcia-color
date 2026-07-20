@@ -11,6 +11,15 @@ export type ProjectCreditRow = {
 const emptyValue = "-";
 
 const creditOverrides: Record<string, Partial<Record<Exclude<CreditKey, "category" | "year">, string>>> = {
+  "1195890962": {
+    agency: "Garnier BBDO",
+  },
+  "1090527138": {
+    agency: "&Rosàs",
+  },
+  "1068999565": {
+    agency: "Garnier BBDO",
+  },
   "1068804932": {
     agency: "Sra. Rushmore",
   },
