@@ -1,0 +1,38 @@
+import { screenCredits } from "@/data/screen-credits";
+
+export function ScreenCredits() {
+  return (
+    <div className="overflow-hidden">
+      <div className="flex snap-x gap-4 overflow-x-auto pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {screenCredits.map((credit, index) => (
+          <article key={`${credit.title}-${credit.year}`} className="w-[138px] shrink-0 snap-start sm:w-[156px] lg:w-[172px]">
+            <div className="relative aspect-[2/3] overflow-hidden border border-line bg-[#0e0e10]">
+              <img
+                src={credit.poster}
+                alt={`${credit.title} poster`}
+                className="h-full w-full object-cover opacity-82 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                loading="lazy"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0b0d]/72 via-transparent to-transparent" />
+              <span className="absolute left-3 top-3 text-[0.58rem] uppercase tracking-[0.18em] text-white/45">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            <div className="mt-4">
+              <h3 className="text-[0.72rem] uppercase leading-5 tracking-[0.14em] text-main">{credit.title}</h3>
+              <p className="mt-2 text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-secondary">
+                {credit.type}
+                {credit.platform ? ` / ${credit.platform}` : ""}
+              </p>
+              <div className="mt-3 border-t border-line pt-3">
+                <p className="text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.role}</p>
+                <p className="mt-1 text-[0.62rem] uppercase leading-4 tracking-[0.18em] text-minimal">{credit.year}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
