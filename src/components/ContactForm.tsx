@@ -8,13 +8,14 @@ type ContactFormProps = {
 
 export function ContactForm({ email }: ContactFormProps) {
   const [name, setName] = useState("");
+  const [senderEmail, setSenderEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const body = [`Name: ${name}`, "", message].join("\n");
+    const body = [`Name: ${name}`, `Email: ${senderEmail}`, "", message].join("\n");
     const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     window.location.href = mailto;
@@ -45,18 +46,19 @@ export function ContactForm({ email }: ContactFormProps) {
         <div>
           <label
             className="mb-2 block text-[0.62rem] uppercase leading-5 tracking-[0.24em] text-minimal"
-            htmlFor="contact-subject"
+            htmlFor="contact-email"
           >
-            <span className="mr-3 text-[#5A5A5A]">02</span>Subject
+            <span className="mr-3 text-[#5A5A5A]">02</span>Email
           </label>
           <input
-            id="contact-subject"
-            name="subject"
-            type="text"
+            id="contact-email"
+            name="email"
+            type="email"
             required
-            value={subject}
-            onChange={(event) => setSubject(event.target.value)}
+            value={senderEmail}
+            onChange={(event) => setSenderEmail(event.target.value)}
             className="h-10 w-full border border-line bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body"
+            autoComplete="email"
           />
         </div>
       </div>
@@ -64,9 +66,27 @@ export function ContactForm({ email }: ContactFormProps) {
       <div className="mt-5">
         <label
           className="mb-2 block text-[0.62rem] uppercase leading-5 tracking-[0.24em] text-minimal"
+          htmlFor="contact-subject"
+        >
+          <span className="mr-3 text-[#5A5A5A]">03</span>Subject
+        </label>
+        <input
+          id="contact-subject"
+          name="subject"
+          type="text"
+          required
+          value={subject}
+          onChange={(event) => setSubject(event.target.value)}
+          className="h-10 w-full border border-line bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body"
+        />
+      </div>
+
+      <div className="mt-5">
+        <label
+          className="mb-2 block text-[0.62rem] uppercase leading-5 tracking-[0.24em] text-minimal"
           htmlFor="contact-message"
         >
-          <span className="mr-3 text-[#5A5A5A]">03</span>Message
+          <span className="mr-3 text-[#5A5A5A]">04</span>Message
         </label>
         <textarea
           id="contact-message"
