@@ -1,5 +1,6 @@
 import { site } from "@/data/site";
 import { ReelThumbnail } from "@/components/ReelThumbnail";
+import { ScreenCreditsMockup } from "@/components/ScreenCreditsMockup";
 import { getPortfolioProjects } from "@/lib/projects";
 
 export const metadata = {
@@ -61,6 +62,16 @@ export default async function AboutPage() {
             </a>
           ))}
         </nav>
+      </section>
+
+      <section className="mt-12 grid gap-8 border-t border-line pt-6 lg:grid-cols-[0.24fr_0.76fr]">
+        <div>
+          <h2 className="eyebrow text-main">Screen Credits</h2>
+          <p className="mt-3 max-w-[160px] text-[0.62rem] uppercase leading-5 tracking-[0.18em] text-minimal">
+            Poster mockup
+          </p>
+        </div>
+        <ScreenCreditsMockup projects={projects} />
       </section>
     </main>
   );
