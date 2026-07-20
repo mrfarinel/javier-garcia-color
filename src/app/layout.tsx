@@ -4,23 +4,35 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://javiergarcia.co"),
+  metadataBase: new URL("https://www.javiergarciacolor.com"),
   title: {
     default: "Javier García | Colorist",
     template: "%s | Javier García",
   },
   description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Javier García | Colorist",
     description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
     type: "website",
-    url: "https://javiergarcia.co",
+    url: "https://www.javiergarciacolor.com",
     siteName: "Javier García",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Javier García colorist portfolio preview",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Javier García | Colorist",
     description: "Portfolio of Javier García, a Madrid-based colorist working internationally.",
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -49,7 +61,7 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 addressLocality: "Madrid",
               },
-              url: "https://javiergarcia.co",
+              url: "https://www.javiergarciacolor.com",
             }),
           }}
         />
