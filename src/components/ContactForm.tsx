@@ -6,6 +6,12 @@ type ContactFormProps = {
   email: string;
 };
 
+type FormErrors = Partial<Record<"name" | "senderEmail" | "subject" | "message", string>>;
+
+const errorText = "This field is required.";
+const emailErrorText = "Please enter a valid email address.";
+const errorClassName = "mt-2 text-[0.62rem] uppercase tracking-[0.18em] text-[#A85E5E]";
+
 export function ContactForm({ email }: ContactFormProps) {
   const [name, setName] = useState("");
   const [senderEmail, setSenderEmail] = useState("");
@@ -14,9 +20,42 @@ export function ContactForm({ email }: ContactFormProps) {
   const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [feedback, setFeedback] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  function validateForm() {
+    const nextErrors: FormErrors = {};
+
+    if (!name.trim()) {
+      nextErrors.name = errorText;
+    }
+
+    if (!senderEmail.trim()) {
+      nextErrors.senderEmail = errorText;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(senderEmail)) {
+      nextErrors.senderEmail = emailErrorText;
+    }
+
+    if (!subject.trim()) {
+      nextErrors.subject = errorText;
+    }
+
+    if (!message.trim()) {
+      nextErrors.message = errorText;
+    }
+
+    setErrors(nextErrors);
+
+    return Object.keys(nextErrors).length === 0;
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!validateForm()) {
+      setStatus("error");
+      setFeedback("Please complete the required fields.");
+      return;
+    }
 
     setStatus("sending");
     setFeedback("");
@@ -55,7 +94,7 @@ export function ContactForm({ email }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-label="Contact form">
+    <form onSubmit={handleSubmit} aria-label="Contact form" noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label
@@ -70,10 +109,22 @@ export function ContactForm({ email }: ContactFormProps) {
             type="text"
             required
             value={name}
-            onChange={(event) => setName(event.target.value)}
-            className="h-10 w-full border border-line bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body"
+            onChange={(event) => {
+              setName(event.target.value);
+              setErrors((current) => ({ ...current, name: undefined }));
+            }}
+            className={`h-10 w-full border bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body ${
+              errors.name ? "border-[#5F3535]" : "border-line"
+            }`}
             autoComplete="name"
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "contact-name-error" : undefined}
           />
+          {errors.name ? (
+            <p id="contact-name-error" className={errorClassName}>
+              {errors.name}
+            </p>
+          ) : null}
         </div>
 
         <div>
@@ -89,10 +140,22 @@ export function ContactForm({ email }: ContactFormProps) {
             type="email"
             required
             value={senderEmail}
-            onChange={(event) => setSenderEmail(event.target.value)}
-            className="h-10 w-full border border-line bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body"
+            onChange={(event) => {
+              setSenderEmail(event.target.value);
+              setErrors((current) => ({ ...current, senderEmail: undefined }));
+            }}
+            className={`h-10 w-full border bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body ${
+              errors.senderEmail ? "border-[#5F3535]" : "border-line"
+            }`}
             autoComplete="email"
+            aria-invalid={Boolean(errors.senderEmail)}
+            aria-describedby={errors.senderEmail ? "contact-email-error" : undefined}
           />
+          {errors.senderEmail ? (
+            <p id="contact-email-error" className={errorClassName}>
+              {errors.senderEmail}
+            </p>
+          ) : null}
         </div>
       </div>
 
@@ -119,9 +182,21 @@ export function ContactForm({ email }: ContactFormProps) {
           type="text"
           required
           value={subject}
-          onChange={(event) => setSubject(event.target.value)}
-          className="h-10 w-full border border-line bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body"
+          onChange={(event) => {
+            setSubject(event.target.value);
+            setErrors((current) => ({ ...current, subject: undefined }));
+          }}
+          className={`h-10 w-full border bg-[#0E0E10] px-3 text-sm text-main outline-none transition-colors focus:border-body ${
+            errors.subject ? "border-[#5F3535]" : "border-line"
+          }`}
+          aria-invalid={Boolean(errors.subject)}
+          aria-describedby={errors.subject ? "contact-subject-error" : undefined}
         />
+        {errors.subject ? (
+          <p id="contact-subject-error" className={errorClassName}>
+            {errors.subject}
+          </p>
+        ) : null}
       </div>
 
       <div className="mt-5">
@@ -137,9 +212,21 @@ export function ContactForm({ email }: ContactFormProps) {
           required
           rows={6}
           value={message}
-          onChange={(event) => setMessage(event.target.value)}
-          className="w-full resize-none border border-line bg-[#0E0E10] px-3 py-3 text-sm leading-7 text-main outline-none transition-colors focus:border-body"
+          onChange={(event) => {
+            setMessage(event.target.value);
+            setErrors((current) => ({ ...current, message: undefined }));
+          }}
+          className={`w-full resize-none border bg-[#0E0E10] px-3 py-3 text-sm leading-7 text-main outline-none transition-colors focus:border-body ${
+            errors.message ? "border-[#5F3535]" : "border-line"
+          }`}
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "contact-message-error" : undefined}
         />
+        {errors.message ? (
+          <p id="contact-message-error" className={errorClassName}>
+            {errors.message}
+          </p>
+        ) : null}
       </div>
 
       <div className="mt-5 flex justify-end">
@@ -156,7 +243,7 @@ export function ContactForm({ email }: ContactFormProps) {
       {feedback ? (
         <p
           className={`mt-4 text-right text-[0.68rem] uppercase tracking-[0.18em] ${
-            status === "sent" ? "text-[#6FA99A]" : "text-body"
+            status === "sent" ? "text-[#6FA99A]" : "text-[#A85E5E]"
           }`}
           role="status"
         >
