@@ -141,6 +141,22 @@ If a Vimeo video is private, allow embedding on the final website domain inside 
 Settings → Privacy → Embed → Specific domains
 ```
 
+## CONTACT FORM
+
+The contact form sends email from the website through Resend.
+
+Add these environment variables in Vercel:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=mrfarinel@gmail.com
+CONTACT_FROM_EMAIL=Javier García Portfolio <contact@javiergarciacolor.com>
+```
+
+For the most professional setup, verify `javiergarciacolor.com` inside Resend first, then use an address from that domain in `CONTACT_FROM_EMAIL`.
+
+The visitor's email is added as the reply-to address, so replies go directly to the person who sent the message.
+
 ## TROUBLESHOOTING
 
 ### `command not found: npm`

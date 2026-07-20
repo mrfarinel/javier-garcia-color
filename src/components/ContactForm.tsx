@@ -11,14 +11,47 @@ export function ContactForm({ email }: ContactFormProps) {
   const [senderEmail, setSenderEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const body = [`Name: ${name}`, `Email: ${senderEmail}`, "", message].join("\n");
-    const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sending");
+    setFeedback("");
 
-    window.location.href = mailto;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email: senderEmail,
+          subject,
+          message,
+          company,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "The message could not be sent.");
+      }
+
+      setName("");
+      setSenderEmail("");
+      setSubject("");
+      setMessage("");
+      setCompany("");
+      setStatus("sent");
+      setFeedback("Message sent. Thank you.");
+    } catch (error) {
+      setStatus("error");
+      setFeedback(error instanceof Error ? error.message : "The message could not be sent.");
+    }
   }
 
   return (
@@ -63,6 +96,16 @@ export function ContactForm({ email }: ContactFormProps) {
         </div>
       </div>
 
+      <input
+        className="hidden"
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        value={company}
+        onChange={(event) => setCompany(event.target.value)}
+      />
+
       <div className="mt-5">
         <label
           className="mb-2 block text-[0.62rem] uppercase leading-5 tracking-[0.24em] text-minimal"
@@ -102,11 +145,24 @@ export function ContactForm({ email }: ContactFormProps) {
       <div className="mt-5 flex justify-end">
         <button
           type="submit"
-          className="group text-[0.68rem] uppercase tracking-[0.24em] text-main transition-colors hover:text-body"
+          disabled={status === "sending"}
+          className="group text-[0.68rem] uppercase tracking-[0.24em] text-main transition-colors hover:text-body disabled:cursor-wait disabled:text-minimal"
         >
-          Send Message <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+          {status === "sending" ? "Sending" : "Send Message"}{" "}
+          <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
         </button>
       </div>
+
+      {feedback ? (
+        <p
+          className={`mt-4 text-right text-[0.68rem] uppercase tracking-[0.18em] ${
+            status === "sent" ? "text-secondary" : "text-body"
+          }`}
+          role="status"
+        >
+          {feedback}
+        </p>
+      ) : null}
     </form>
   );
 }
