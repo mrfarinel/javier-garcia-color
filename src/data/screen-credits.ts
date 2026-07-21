@@ -61,6 +61,7 @@ export const screenCredits: ScreenCredit[] = [
     type: "Short Film",
     year: "2026",
     poster: "/images/screen-credits/en-tramite.jpg",
+    imdbUrl: "https://www.imdb.com/title/tt43630890/",
   },
   {
     title: "Último Superviviente a Bordo",
