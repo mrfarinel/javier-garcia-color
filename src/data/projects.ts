@@ -293,8 +293,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "frames-from-andalucia-1011262656",
-    "title": "FRAMES FROM ANDALUCÍA",
+    "id": "frames-from-andalucia-documentary-1011262656",
+    "title": "FRAMES FROM ANDALUCIA - DOCUMENTARY",
     "category": "Fiction",
     "year": "2024",
     "uploadedAt": "2024-09-20T09:16:16+00:00",
@@ -377,7 +377,7 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "galgos-season-01-trailer-movistar-923292695",
+    "id": "galgos-season-01-movistar-923292695",
     "title": "GALGOS - SEASON 01 (Movistar+)",
     "category": "Fiction",
     "year": "2024",
@@ -614,20 +614,6 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "once-once-del-once-miami-642295038",
-    "title": "ONCE - ONCE DEL ONCE MIAMI",
-    "category": "Commercial",
-    "year": "2021",
-    "uploadedAt": "2021-11-04T12:46:17+00:00",
-    "thumbnail": "https://i.vimeocdn.com/video/1291972141-34c2b355e71734c2fc80f8cbad14b1d41ef6e9155b28ec019_1920x1080?&r=pad&region=us",
-    "heroImage": "https://i.vimeocdn.com/video/1291972141-34c2b355e71734c2fc80f8cbad14b1d41ef6e9155b28ec019_1920x1080?&r=pad&region=us",
-    "vimeoId": "642295038",
-    "vimeoUrl": "https://vimeo.com/642295038",
-    "description": "Client: ONCE\nDir: David Sarciat\nDop: Roger Llonch Seguí\nAgency: Sra. Rushmore\nProd: Harold Entertainment\nEdit: Desirée Duro\nPost: Telson",
-    "colorist": "Javier García",
-    "stills": []
-  },
-  {
     "id": "once-once-del-once-caballo-642290956",
     "title": "ONCE - ONCE DEL ONCE CABALLO",
     "category": "Commercial",
@@ -652,20 +638,6 @@ export const projects: Project[] = [
     "vimeoId": "603851638",
     "vimeoUrl": "https://vimeo.com/603851638",
     "description": "Starring: Amaia Romero, Marwan y Milena Smit\n\nDirector: Nacho Gayan\nDop: Nicolas Karakatsanis\nAgency: &Rosàs Agency\nProduction: Agosto\nPostproduction: Telson\nColor: Javier García",
-    "colorist": "Javier García",
-    "stills": []
-  },
-  {
-    "id": "mahou-somos-familia-la-historia-de-sergio-y-sonia-583125219",
-    "title": "MAHOU - SOMOS FAMILIA. LA HISTORIA DE SERGIO Y SONIA",
-    "category": "Commercial",
-    "year": "2021",
-    "uploadedAt": "2021-08-04T21:43:51+00:00",
-    "thumbnail": "https://i.vimeocdn.com/video/1206841852-1a3acdef8a2538cfa57ca580b24d22f7db2bd8bbe11a5c762b94d732a4e91b33-d_1920x1080?&r=pad&region=us",
-    "heroImage": "https://i.vimeocdn.com/video/1206841852-1a3acdef8a2538cfa57ca580b24d22f7db2bd8bbe11a5c762b94d732a4e91b33-d_1920x1080?&r=pad&region=us",
-    "vimeoId": "583125219",
-    "vimeoUrl": "https://vimeo.com/583125219",
-    "description": "Director: Eloi Colom\nDop: Mario Montero\nClient: Mahou\nAgency: China\nProduction: The Production Club Spain \nPostproduction: Telson",
     "colorist": "Javier García",
     "stills": []
   },

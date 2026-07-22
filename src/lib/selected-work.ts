@@ -10,7 +10,6 @@ const selectedCommercials = [
   ["JET AM", "MARKET"],
   ["EL CORTE INGLES"],
   ["MAHOU", "ENCUENTROS MADRID"],
-  ["MAHOU", "SOMOS FAMILIA"],
   ["CLEMONT"],
   ["DIRIYAH"],
   ["MILAF"],
