@@ -4,10 +4,16 @@ const selectedCommercials = [
   ["LA PROHIBIDA"],
   ["PILSEN AHUMADA"],
   ["CERVEZA IMPERIAL"],
+  ["RENFE", "POESIA"],
+  ["ALHAMBRA", "LA ESPERA"],
   ["MINISTERIO DE INCLUSION"],
   ["JET AM", "MARKET"],
   ["EL CORTE INGLES"],
   ["MAHOU", "ENCUENTROS MADRID"],
+  ["MAHOU", "SOMOS FAMILIA"],
+  ["CLEMONT"],
+  ["DIRIYAH"],
+  ["MILAF"],
 ];
 
 const selectedFiction = [
