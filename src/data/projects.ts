@@ -293,8 +293,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "frames-from-andalucia-documentary-trailer-2024-1011262656",
-    "title": "FRAMES FROM ANDALUCIA - DOCUMENTARY TRAILER 2024",
+    "id": "frames-from-andalucia-1011262656",
+    "title": "FRAMES FROM ANDALUCÍA",
     "category": "Fiction",
     "year": "2024",
     "uploadedAt": "2024-09-20T09:16:16+00:00",
