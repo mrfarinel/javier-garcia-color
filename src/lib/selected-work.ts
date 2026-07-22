@@ -24,6 +24,8 @@ const selectedFiction = [
   ["FRAMES FROM ANDALUCIA"],
 ];
 
+const excludedHomeVimeoIds = new Set(["582076986", "582086097"]);
+
 function normalizeValue(value: string) {
   return value
     .normalize("NFD")
@@ -63,5 +65,7 @@ export function getHomeSelectedProjects(projects: Project[]) {
   );
   const musicVideos = projects.filter((project) => project.category === "Music Video");
 
-  return uniqueProjects([...commercials, ...fiction, ...musicVideos]);
+  return uniqueProjects([...commercials, ...fiction, ...musicVideos]).filter(
+    (project) => !excludedHomeVimeoIds.has(project.vimeoId),
+  );
 }
