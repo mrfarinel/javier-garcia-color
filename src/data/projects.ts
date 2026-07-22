@@ -378,7 +378,7 @@ export const projects: Project[] = [
   },
   {
     "id": "galgos-season-01-trailer-movistar-923292695",
-    "title": "GALGOS - SEASON 01 TRAILER (Movistar+)",
+    "title": "GALGOS - SEASON 01 (Movistar+)",
     "category": "Fiction",
     "year": "2024",
     "uploadedAt": "2024-03-14T10:51:10+00:00",
