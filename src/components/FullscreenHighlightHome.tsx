@@ -11,26 +11,6 @@ type FullscreenHighlightHomeProps = {
   projects: Project[];
 };
 
-const fixedHighlightOrder = [
-  ["LA PROHIBIDA"],
-  ["DESEO"],
-  ["PILSEN AHUMADA"],
-  ["LA COCINERA DE CASTAMAR", "EP 06"],
-  ["GALGOS"],
-];
-
-function normalizeValue(value: string) {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase();
-}
-
-function matchesProject(project: Project, terms: string[]) {
-  const title = normalizeValue(project.title);
-  return terms.every((term) => title.includes(normalizeValue(term)));
-}
-
 function shuffleProjects(projects: Project[]) {
   const shuffled = [...projects];
 
@@ -44,29 +24,13 @@ function shuffleProjects(projects: Project[]) {
 
 export function FullscreenHighlightHome({ projects }: FullscreenHighlightHomeProps) {
   const availableProjects = useMemo(() => projects.filter((project) => project.heroImage), [projects]);
-  const initialProjects = useMemo(() => {
-    const fixedProjects = fixedHighlightOrder
-      .map((terms) => availableProjects.find((project) => matchesProject(project, terms)))
-      .filter((project) => project !== undefined);
-    const fixedIds = new Set(fixedProjects.map((project) => project.id));
-    const remainingProjects = availableProjects.filter((project) => !fixedIds.has(project.id));
-
-    return [...fixedProjects, ...remainingProjects];
-  }, [availableProjects]);
-
-  const [visibleProjects, setVisibleProjects] = useState(initialProjects);
+  const [visibleProjects, setVisibleProjects] = useState(availableProjects);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const activeProject = visibleProjects[activeIndex];
 
   useEffect(() => {
-    const fixedProjects = fixedHighlightOrder
-      .map((terms) => availableProjects.find((project) => matchesProject(project, terms)))
-      .filter((project) => project !== undefined);
-    const fixedIds = new Set(fixedProjects.map((project) => project.id));
-    const remainingProjects = availableProjects.filter((project) => !fixedIds.has(project.id));
-
-    setVisibleProjects([...fixedProjects, ...shuffleProjects(remainingProjects)]);
+    setVisibleProjects(shuffleProjects(availableProjects));
     setActiveIndex(0);
     setIsVideoOpen(false);
   }, [availableProjects]);
