@@ -52,7 +52,7 @@ type VimeoApiCollection = {
 };
 
 const VIMEO_USERNAME = "mrfarinel";
-const EXPECTED_PROFILE_VIDEO_TOTAL = 58;
+const EXPECTED_PROFILE_VIDEO_TOTAL = 56;
 const FALLBACK_CATEGORY: ProjectCategory = "Commercial";
 const categoryPriority: ProjectCategory[] = ["Fiction", "Series", "Music Video", "Commercial"];
 

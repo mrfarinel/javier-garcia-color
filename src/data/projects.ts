@@ -41,8 +41,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "deseo-trailer-netflix-1195889439",
-    "title": "DESEO - TRAILER (NETFLIX)",
+    "id": "deseo-netflix-1195889439",
+    "title": "DESEO - NETFLIX",
     "category": "Fiction",
     "year": "2026",
     "uploadedAt": "2026-05-27T08:13:57+00:00",
@@ -418,8 +418,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "la-cocinera-de-castamar-highlights-season-01-ep-9-861579407",
-    "title": "LA COCINERA DE CASTAMAR - HIGHLIGHTS SEASON 01 EP 9",
+    "id": "la-cocinera-de-castamar-season-01-ep-9-861579407",
+    "title": "LA COCINERA DE CASTAMAR - SEASON 01 EP 9",
     "category": "Fiction",
     "year": "2023",
     "uploadedAt": "2023-09-06T09:36:41+00:00",
@@ -432,8 +432,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "la-cocinera-de-castamar-highlights-season-01-ep-7-833997895",
-    "title": "LA COCINERA DE CASTAMAR - HIGHLIGHTS SEASON 01 EP 7",
+    "id": "la-cocinera-de-castamar-season-01-ep-7-833997895",
+    "title": "LA COCINERA DE CASTAMAR - SEASON 01 EP 7",
     "category": "Fiction",
     "year": "2023",
     "uploadedAt": "2023-06-07T11:01:33+00:00",
@@ -474,8 +474,8 @@ export const projects: Project[] = [
     "stills": []
   },
   {
-    "id": "la-cocinera-de-castamar-highlights-season-01-ep-02-818705563",
-    "title": "LA COCINERA DE CASTAMAR - HIGHLIGHTS SEASON 01 EP 02",
+    "id": "la-cocinera-de-castamar-season-01-ep-02-818705563",
+    "title": "LA COCINERA DE CASTAMAR - SEASON 01 EP 02",
     "category": "Fiction",
     "year": "2023",
     "uploadedAt": "2023-04-18T11:53:26+00:00",
