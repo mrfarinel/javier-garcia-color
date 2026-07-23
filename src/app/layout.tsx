@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Javier García",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-logo-preview.jpg",
         width: 1200,
         height: 630,
         alt: "Javier García DI Colorist portfolio preview",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Javier García | DI Colorist",
     description:
       "Javier García is a Madrid-based DI Colorist working internationally across fiction, commercials, series and music videos.",
-    images: ["/og-image.jpg"],
+    images: ["/og-logo-preview.jpg"],
   },
 };
 
