@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -52,6 +53,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://f.vimeocdn.com" />
       </head>
       <body className="font-sans antialiased">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-LQLBESL5EE" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LQLBESL5EE');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
