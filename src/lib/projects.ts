@@ -68,6 +68,75 @@ function getTitleCategory(title: string) {
   return titleCategoryMap.find((entry) => normalizedTitle.includes(normalizeTitle(entry.match)))?.category;
 }
 
+const primaryWorkOrder = [
+  ["pilsen ahumada"],
+  ["deseo"],
+  ["la prohibida", "mahou"],
+  ["galgos"],
+  ["ministerio de inclusion"],
+  ["el corte ingles"],
+  ["la cocinera de castamar", "ep 06"],
+  ["jet am", "market"],
+  ["mahou", "encuentros madrid"],
+  ["diriyah"],
+  ["central lechera asturiana", "bares"],
+];
+
+const secondaryWorkOrder = [
+  ["rubio"],
+  ["clemont"],
+  ["renfe"],
+  ["alhambra"],
+  ["cerveza imperial"],
+  ["asisa"],
+  ["once", "eurojackpot"],
+  ["mahou", "tostada"],
+  ["san miguel"],
+  ["nasdrovia"],
+  ["frames from andalucia"],
+  ["el nuevo barrio"],
+  ["la cocinera de castamar", "ep 9"],
+  ["la cocinera de castamar", "ep 7"],
+  ["funkcut"],
+];
+
+function matchesTitle(project: Project, terms: string[]) {
+  const title = normalizeTitle(project.title);
+  return terms.every((term) => title.includes(normalizeTitle(term)));
+}
+
+function getCuratedOrderIndex(project: Project, order: string[][]) {
+  const index = order.findIndex((terms) => matchesTitle(project, terms));
+  return index === -1 ? Number.POSITIVE_INFINITY : index;
+}
+
+function getProjectTimestamp(project: Project) {
+  const timestamp = Date.parse(project.uploadedAt ?? project.year);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function compareCuratedOrder(a: Project, b: Project, order: string[][]) {
+  const aIndex = getCuratedOrderIndex(a, order);
+  const bIndex = getCuratedOrderIndex(b, order);
+
+  if (Number.isFinite(aIndex) && Number.isFinite(bIndex)) return aIndex - bIndex;
+  if (Number.isFinite(aIndex)) return -1;
+  if (Number.isFinite(bIndex)) return 1;
+  return 0;
+}
+
+function sortWorkProjects(projects: Project[]) {
+  return [...projects].sort((a, b) => {
+    const primaryDelta = compareCuratedOrder(a, b, primaryWorkOrder);
+    if (primaryDelta !== 0) return primaryDelta;
+
+    const secondaryDelta = compareCuratedOrder(a, b, secondaryWorkOrder);
+    if (secondaryDelta !== 0) return secondaryDelta;
+
+    return getProjectTimestamp(b) - getProjectTimestamp(a);
+  });
+}
+
 async function fetchVimeoPages<T>(initialUrl: string, token: string) {
   const items: T[] = [];
   let url: string | null = initialUrl;
@@ -155,7 +224,7 @@ export function isReelProject(project: Project) {
 
 export async function getWorkProjects() {
   const projects = await getPortfolioProjects();
-  return projects.filter((project) => !isReelProject(project));
+  return sortWorkProjects(projects.filter((project) => !isReelProject(project)));
 }
 
 export async function getWorkProject(id: string) {

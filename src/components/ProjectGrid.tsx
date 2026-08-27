@@ -50,7 +50,7 @@ export function ProjectGrid({
         ? workProjects
         : workProjects.filter((project) => project.category === mappedCategory);
 
-    if (preserveOrder) return visibleProjects;
+    if (preserveOrder && mappedCategory === "All") return visibleProjects;
 
     return [...visibleProjects].sort((a, b) => {
       const dateDelta = getProjectTimestamp(b) - getProjectTimestamp(a);
