@@ -31,6 +31,16 @@ function getProjectTimestamp(project: Project) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getFictionOrder(project: Project) {
+  const title = project.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (title.includes("deseo")) return 0;
+  if (title.includes("galgos")) return 1;
+  if (title.includes("la cocinera de castamar") && /ep\s*0?6\b/.test(title)) return 2;
+  if (title.includes("nasdrovia")) return 3;
+  if (title.includes("la cocinera de castamar")) return 4;
+  return 5;
+}
+
 export function ProjectGrid({
   projects,
   categories,
@@ -53,10 +63,14 @@ export function ProjectGrid({
     if (preserveOrder && mappedCategory === "All") return visibleProjects;
 
     return [...visibleProjects].sort((a, b) => {
+      if (preserveOrder && mappedCategory === "Fiction") {
+        const fictionDelta = getFictionOrder(a) - getFictionOrder(b);
+        if (fictionDelta !== 0) return fictionDelta;
+      }
       const dateDelta = getProjectTimestamp(b) - getProjectTimestamp(a);
       return dateDelta === 0 ? (indexById.get(a.id) ?? 0) - (indexById.get(b.id) ?? 0) : dateDelta;
     });
-  }, [activeCategory, projects]);
+  }, [activeCategory, projects, preserveOrder]);
 
   const visibleCategories = useMemo(() => {
     return categories.filter((category) => {
